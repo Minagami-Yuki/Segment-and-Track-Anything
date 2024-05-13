@@ -132,6 +132,8 @@ class SegTracker():
         Return:
             new_obj_mask: numpy array (h,w)
         '''
+        # 
+
         new_obj_mask = (track_mask == 0) * seg_mask
         new_obj_ids = np.unique(new_obj_mask)
         new_obj_ids = new_obj_ids[new_obj_ids != 0]
@@ -228,7 +230,7 @@ class SegTracker():
             annotated_frame: numpy array (h, w, 3)
         '''
         # backup id and origin-merged-mask  备份id和origin-merged-mask
-        refined_merged_mask = 0  # 初始化，防止某一帧没有检测物体时报错
+        refined_merged_mask = 0  # 初始化，防止某一帧没有检测物体时报错，原来是None
         bc_id = self.curr_idx
         bc_mask = self.origin_merged_mask
 
@@ -243,8 +245,13 @@ class SegTracker():
                 1] * box_size_threshold:
                 continue
             interactive_mask = self.sam.segment_with_box(origin_frame, bbox, reset_image)[0]
-            # refined_merged_mask = 0  # new，初始化
-            refined_merged_mask: int = self.add_mask(interactive_mask)
+            
+            # 2/10/2024 
+            if refined_merged_mask is None:
+                refined_merged_mask = interactive_mask.copy()  # 修改此处
+            else:
+                refined_merged_mask: int = self.add_mask(interactive_mask)
+                
             self.update_origin_merged_mask(refined_merged_mask)
             self.curr_idx += 1
 
