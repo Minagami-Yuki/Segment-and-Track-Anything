@@ -1,4 +1,4 @@
-# The code is from [https://github.com/z-x-yang/Segment-and-Track-Anything](https://github.com/facebookresearch/segment-anything)
+# The code is from [https://github.com/z-x-yang/Segment-and-Track-Anything](https://github.com/z-x-yang/Segment-and-Track-Anything)
 # I fixed the SegTracker.py bug to avoid errors when no object is detected in the video, and partially commented the demo section.
 # Segment and Track Anything (SAM-Track)
 **Online Demo:** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1R10N70AJaslzADFqb-a5OihYkllWEVxB?usp=sharing)
